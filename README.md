@@ -57,9 +57,9 @@ I spent some time tracing out the circuit because a rectifier only needs 4 diode
 
 <img src="images/IMG_2703.jpeg" width="400">
 
-Here's a quickly scribbled circuit:
+Here's the power and enable circuit:
 
-TODO
+![](images/rectifier.png)
 
 ## Wiring HR and MIN
 
@@ -73,13 +73,11 @@ The HR and MIN buttons just trigger on logic high, so those are wired directly t
 
 Clock power is switched through a transistor, since digital output pins can't typically supply enough current. Click [here](https://www.electronics-tutorials.ws/io/output-interfacing-circuits.html) to read more about using transistors with digital outputs. Here's the circuit I used:
 
-TODO
+![](images/clockpower.png)
 
 As noted above, PIC16 pin 4 needs a logic low to enable the clock. This is wired to Q6, which is the output of the half-rectified enable circuit. You can see the purple wire on the picture below.
 
 Finally, the DIM transistor is wired across the switch. This was a bit of a hack, but the voltage on the left side of the DIM switch was 6V and the right side was 1V. So, I setup the transistor to just switch the current flow from high to low and it worked.
-
-TODO
 
 <img src="images/IMG_2710.jpeg" width="400">
 

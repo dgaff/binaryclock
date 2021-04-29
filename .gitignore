@@ -1,9 +1,10 @@
 # Temp files
 ~*.*
 
-# Private
+# Private and backup
 wifisecrets.h
 .DS_Store
+.sch-bak
 
 # Prerequisites
 *.d
