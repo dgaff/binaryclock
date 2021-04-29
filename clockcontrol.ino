@@ -31,7 +31,7 @@ TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   //UTC - 5 hours
 Timezone usEastern(usEDT, usEST);
 
 // Turn on serial output for debugging
-//#define SERIAL
+#define SERIAL
 
 // Time info. I'm using timezone library to convert, so no UTC offset required.
 //const long utcOffsetInSeconds = -18000; // EST
@@ -121,7 +121,7 @@ void setClockTime(int hour, int minute)
     delay(500);
 
     // Handle wrap-around case when the clock has started past the current time.
-    if (hr < 12) hr = hr + 12;
+    if (hr < 12) hr = hr + 24;
     if (min < 1) min = min + 60;
 
     // Advance the hour
@@ -144,47 +144,6 @@ void setClockTime(int hour, int minute)
       mincount++;
     }
 }
-
-/*
-
-Goal: NTP-sync clock setup with 12 or 24-hr time selection on boot.
-
-2 digital output lines: HR / MIN
-1 digital output line: clock on
-ESP controlled power on - this is required because if I want to support 24-hour mode, I have to hold HR ON on power up. 
-If I want 12-hour mode, I don't hold HR on.
-- Option is to just pull HR on and use a pull up / pull down to switch HR. This will always keep it in 24-hr mode.
-- Otherwise use a transistor to switch power to the clock
-Advantage of switching the clock is that I could correct for drift. Based on watching the clock over time, I could setup a drift correction to happen overnight
-after a certain period of time elapses
-
-One other thing: EST vs. EDT - could look for a library to know when to switch between the two
-
-HW
-- Replace 9 VAC power plug with 5V DC
-- Remove the rectifier and regulator circuit on the board to save space
-- Embed the ESP8266 behind the main board
-- Will need to remove the weight, though. Need to see if the clock is stable on a table without the weight
-- Install a micro USB female pigtail in place of the existing power output
-- Find some good 5V power plugs, like apple knock offs or right angle like the simplicam plugs
-- Will have a small daughter board if I need to switch the clock on with a transistor
-- Digital outs might be able to drive HR and MIN directly, need to check with scope
-
-Post outline
-- This is the clock, about 10 years old.
-- My goals - notes above
-- Summary of changes required, link to code
-- Step by step
--- Investigate the board, talk about the rectifier
--- Discover the PIN 4 thing on the PIC16
--- Wire up HR/MIN controls
--- Power and enable - explain the transistor switch
--- Explain transistor on DIM
--- Talk about power drop of 5V coming through protection diode - wasn't an issue here
--- Does this have an impact on LED brightness?
--- Assembly pictures
-
-*/
 
 // Run once setup - sets up the initial output pin states and gets on wifi
 
