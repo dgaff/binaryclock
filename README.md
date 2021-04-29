@@ -49,13 +49,13 @@ This is best explained by just showing an animation of the time synchronization.
 
 The clock is held together with 4 tabs snap-fitted. Using a small flat head screwdriver, you can pop the gray front panel off pretty easily. Surprise! Those are not full size round LEDs. Those are light pipes that go to surface mount LEDs on the circuit board.
 
-![](images/IMG_2675.jpeg)
+<img src="images/IMG_2675.jpeg" width="400">
 
 On the lower right on the board, you can see the row of diodes that make up the rectifier and the pulse circuit for the enable pin. You can see the inline capacitor and 5V regulator.
 
 I spent some time tracing out the circuit because a rectifier only needs 4 diodes, and I wanted to know why those other two diodes were there. This is how I found the pulse enable pin.
 
-![](images/IMG_2703.jpeg)
+<img src="images/IMG_2703.jpeg" width="400">
 
 Here's a quickly scribbled circuit:
 
@@ -67,7 +67,7 @@ In the image below, you can see where to wire up 5V power and ground on the boar
 
 The HR and MIN buttons just trigger on logic high, so those are wired directly to digital output pins on the ESP8266.
 
-![](images/IMG_2680.jpeg)
+<img src="images/IMG_2680.jpeg" width="400">
 
 ## Wiring Clock Power, MCLR, and DIM
 
@@ -81,13 +81,13 @@ Finally, the DIM transistor is wired across the switch. This was a bit of a hack
 
 TODO
 
-![](images/IMG_2710.jpeg)
+<img src="images/IMG_2710.jpeg" width="400">
 
 ## Moving from Breadboard to Protoboard
 
 Once I got everything working, I used a small piece of protoboard to make the external transistor circuit more permanent. I also moved all of the wires to the back of the board so that they won't interfere with the clock face. You can see that in a picture at the end.
 
-![](images/IMG_2711.jpeg)
+<img src="images/IMG_2711.jpeg" width="400">
 
 ## Removing the Old Power Circuit
 
@@ -98,15 +98,13 @@ Before deciding to do this, I measured the current consumption on the clock boar
 1. There's a 500 mA fuse on the board. This is in place to keep you from drawing more than the rated current for USB 2.0, which is 500 mA. [Newer versions of USB](https://en.wikipedia.org/wiki/USB) can supply more, but this little board isn't setup to support that. So *if you draw more than 500 mA, you'll pop the fuse.* I've done this in past projects, which is how I discovered there was a fuse. The fuse is a tiny SMT component to replace!
 2. There's a protection diode on the 5V coming from the USB connector. This keeps current from flowing back to the computer. It also causes a 0.3 V drop, so that 5 V pin is actually 4.7 V. For most digital circuits, this is fine, but if you have something that really needs 5 V, you'll need a different approach.
 
-![](images/ESP.png)
+<img src="images/ESP.png" width="400">
 
 I could have just left the old supply in there, but the plastic housing for this clock is small, and the capacitor and power jack on the back of the board were taking up precious space. So, I removed all of the old power supply components, circled in red below.
 
-![](images/IMG_2712.jpeg)
+<img src="images/IMG_2712.jpeg" width="400">
 
-![](images/IMG_2714.jpeg)
-
-
+<img src="images/IMG_2714.jpeg" width="400">
 
 ## Installing Power with a USB Pigtail
 
@@ -116,21 +114,21 @@ This was the most delicate part of the project. It takes precision surface mount
 
 After I soldered up this pigtail, I glue gunned these small wires in the hope that they'd stay in place.
 
-![](images/IMG_2715.jpeg)
+<img src="images/IMG_2715.jpeg" width="400">
 
-![](images/0001.jpg)
+<img src="images/0001.jpg" width="400">
 
-![](images/IMG_2718.jpeg)
+<img src="images/IMG_2718.jpeg" width="400">
 
 ## Reassembly
 
 Below is the empty housing. There's a big piece of metal to give the clock some weight, but unfortunately it has to go because it's taking up space I need for these new boards.
 
-![](images/IMG_2679.jpeg)
+<img src="images/IMG_2679.jpeg" width="400">
 
 I used a hot glue gun to affix the ESP8266 board and the small transistor board to the back of the housing. You can also see how I've moved all of the wires to the back of the board. For a couple of the wires, I used a via to thread the wire through to the front where it could be soldered to a surface mount component.
 
-![](images/IMG_2717.jpeg)
+<img src="images/IMG_2717.jpeg" width="400">
 
 # Future Ideas
 
