@@ -31,7 +31,7 @@ TimeChangeRule usEST = {"EST", First, Sun, Nov, 2, -300};   //UTC - 5 hours
 Timezone usEastern(usEDT, usEST);
 
 // Turn on serial output for debugging
-#define SERIAL
+//#define SERIAL
 
 // Time info. I'm using timezone library to convert, so no UTC offset required.
 //const long utcOffsetInSeconds = -18000; // EST
@@ -63,12 +63,17 @@ bool clock24hrMode = true;
 // D4 is clock enable - puts Pin 4 on the PIC16 low, which is required to light up the clock
 // D8 is DIM switch through transistor
 
-void restartClock()
+void turnOffClock()
 {
-    // Turn off clock 
     digitalWrite(D3, LOW);
     digitalWrite(D4, HIGH);
     delay(500);
+}
+
+void restartClock()
+{
+    // Turn off clock
+    turnOffClock(); 
 
     // Hold HR low for 24-hour mode
     if (clock24hrMode) 
@@ -189,6 +194,10 @@ void setup()
 int initClockTime = 1; // 1 = power cycle the clock at :55   2 = synchronize seconds and set the time at :00
 bool isDST = false;    // used to catch DST change, not yet tested
 
+bool nightModeOn = true;
+int nightHour = 21; // time to shut off
+int dayHour = 8;    // time to turn on, make sure it's >= 1
+
 void loop()
 {
   // Read the UTC time
@@ -240,6 +249,14 @@ void loop()
       Need to watch the clock for a while and see how much it drifts. Then just periodically init the clock again.
       If the LED clock is put on a Hue timer or something to have it off at night, this isn't really necessary.  
     */
+
+    // Check for night mode
+    if (nightModeOn)
+    {
+      // Turn on for daytime, off for nightime
+      if (hour == dayHour-1 && minute == 59 && seconds == 0) initClockTime = 1;
+      else if (hour == nightHour && minute == 0 && seconds == 0) turnOffClock();
+    }
   }
 
   yield();
