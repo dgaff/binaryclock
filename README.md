@@ -57,7 +57,7 @@ I spent some time tracing out the circuit because a rectifier only needs 4 diode
 
 <img src="images/IMG_2703.jpeg" width="400">
 
-Here's the power and enable circuit:
+Here's the power and enable circuit. I left out the Capacitor and 5 V regulator after the rectifier, but you get the idea.
 
 ![](images/rectifier.png)
 
@@ -108,7 +108,7 @@ I could have just left the old supply in there, but the plastic housing for this
 
 There isn't room in the housing to put a USB extension on the ESP8266 board, so I opted to solder on a USB pigtail. This required desoldering the micro-USB plug.
 
-This was the most delicate part of the project. It takes precision surface mount soldering equipment and magnification. These pins are a very small pitch. I accidentally desoldered that protection diode while I was removing the USB plug with the heat pencil, too. Oops!
+This was the most delicate part of the project. It takes precision surface mount soldering equipment and magnification. These pins are a very small pitch. I accidentally desoldered that protection diode while I was removing the USB plug with the hot air pencil, too. Oops!
 
 After I soldered up this pigtail, I glue gunned these small wires in the hope that they'd stay in place.
 
